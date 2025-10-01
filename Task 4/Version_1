@@ -1,0 +1,25 @@
+# import pandas as pd
+
+# bk = pd.read_csv('books-en.csv', sep=';', encoding='latin-1')
+# bk['Price'] = bk['Price'].str.replace(',','.')
+# bk['Price'] = pd.to_numeric(bk['Price'])
+
+# print(bk[bk['Price']<200])
+
+import xml.etree.ElementTree as ET
+
+# Abrir y parsear el archivo XML
+tree = ET.parse('currency.xml')
+root = tree.getroot()
+
+# Mostrar todas las monedas
+print("=== LISTA DE MONEDAS ===")
+for valute in root.findall('Valute'):
+    print(f"ID: {valute.get('ID')}")
+    print(f"Código: {valute.find('CharCode').text}")
+    print(f"Nombre: {valute.find('Name').text}")
+    print(f"Nominal: {valute.find('Nominal').text}")
+    print(f"Valor: {valute.find('Value').text} RUB")
+    print(f"Valor por unidad: {valute.find('VunitRate').text} RUB")
+    print("-" * 50)
+
